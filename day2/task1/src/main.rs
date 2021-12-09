@@ -6,26 +6,36 @@ fn main() -> std::io::Result<()> {
     let mut file_context = String::new();
     file.read_to_string(&mut file_context)?;
 
-    let test_string = String::from("down 8");
-    let mut index_of_space = 0;
-    for character in test_string.as_bytes() {
-        if *character == b' ' {
-            break;
+    let mut operations: Vec<(String, i32)> = Vec::new();
+    for line in file_context.lines() {
+        let mut index_of_space = 0;
+        for character in line.as_bytes() {
+            if *character == b' ' {
+                break;
+            }
+            index_of_space += 1;
         }
-        index_of_space += 1;
+
+        let word = String::from(&line[..index_of_space]); // extracting word from file
+        let number = (&line[index_of_space..].trim()).parse::<i32>().unwrap(); // extracting number from file
+
+        let tuple = (String::from(word), number);
+
+        operations.push(tuple);
     }
-    let word = String::from(&test_string[..index_of_space]);
-    let digit = &test_string[index_of_space..].trim();
-    let digit = *(&digit.parse::<i32>().unwrap());
 
-    println!("{}", word);
-    println!("{}", digit);
+    let mut horizontal_position = 0;
+    let mut depth = 0;
 
-    let mut operaion: Vec<(String, i32)> = Vec::new();
-    let tuple = (String::from(word), digit);
-    operaion.push(tuple);
-    println!("{:#?}", operaion);
-
-    // println!("{}", file_context);
+    for operation in operations {
+        if operation.0 == "down" {
+            depth += operation.1;
+        } else if operation.0 == "up" {
+            depth -= operation.1;
+        } else {
+            horizontal_position += operation.1
+        }
+    }
+    println!("{}", horizontal_position * depth);
     Ok(())
 }
