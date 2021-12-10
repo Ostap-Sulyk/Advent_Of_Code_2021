@@ -15,11 +15,9 @@ fn main() -> Result<()> {
         // convert string to vector of numbers
         data.push(number.parse().unwrap());
     }
-
     let mut increase_count = 0; // will hold number of times depth increased
     let mut next_number;
     let mut current_number;
-
     let mut index = 0; // while iterating over array
     let num_of_elements = data.len(); // to avoid calling data.len() multiple times, i assigned its value to number_of_elements
 
