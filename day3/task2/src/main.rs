@@ -1,8 +1,11 @@
 fn main() {
-    let mut gamma_rate = String::new();
-    let mut epsilon_rate = String::new();
+    // let mut gamma_rate = String::new();
+    // let mut epsilon_rate = String::new();
 
-    let data: Vec<&str> = include_str!("../input")
+    let mut vec_with_zeros = Vec::new();
+    let mut vec_with_ones = Vec::new();
+    // creating vector from test_input
+    let data: Vec<&str> = include_str!("../test_input")
         .lines()
         .map(|line| line.trim())
         .collect();
@@ -12,32 +15,19 @@ fn main() {
         vec_data.push(data[i].chars().collect());
     }
 
-    for column in 0..vec_data[0].len() {
-        let mut count0: usize = 0;
-        let mut count1: usize = 0;
+    for column in 0..1 {
         for row in 0..vec_data.len() {
             if vec_data[row][column] == '0' {
-                count0 += 1;
+                vec_with_zeros.push(&vec_data[row]);
             } else {
-                count1 += 1;
+                vec_with_ones.push(&vec_data[row]);
             }
         }
-        if count0 > count1 {
-            gamma_rate.push_str("0");
-        } else {
-            gamma_rate.push_str("1");
-        }
     }
 
-    for bit in gamma_rate.chars() {
-        if bit == '0' {
-            epsilon_rate.push_str("1")
-        } else {
-            epsilon_rate.push_str("0")
-        }
-    }
-    let gamma_rate = isize::from_str_radix(gamma_rate.as_str(), 2).unwrap();
-    let epsilon_rate = isize::from_str_radix(epsilon_rate.as_str(), 2).unwrap();
-
-    println!("The power consumption is: {}", gamma_rate * epsilon_rate);
+    println!("0000000000000000000");
+    println!("{:?}", vec_with_zeros.len());
+    println!("11111111111111111");
+    println!("{:?}", vec_with_ones.len());
+    // println!("{:#?}", vec_data);
 }
