@@ -1,11 +1,4 @@
 fn main() {
-    println!("Hello, world!");
-}
-use std::fs::File;
-use std::io::prelude::*;
-use std::io::Result;
-
-fn main() {
     let mut gamma_rate = String::new();
     let mut epsilon_rate = String::new();
 
