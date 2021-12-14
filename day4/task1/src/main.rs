@@ -82,7 +82,7 @@ fn main() {
     );
 
     let mut couner = 0;
-    'outer: for board in boards.iter() {
+    for board in boards.iter() {
         for row in board {
             for (index, boolean) in row {
                 println!(
